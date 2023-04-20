@@ -7,16 +7,14 @@ def pascal_triangle(n):
     returns a representation of the Pascal’s triangle of n
     """
     triangle = []
-
-    # return (trianlgle if n <= 0)
-    if n <= 0:
+    if n <= 0:  # return empty list when 0 is given
         return triangle
-    for i in range(n):
+    for i in range(n):  # loop thru
         temp_list = []
 
         for j in range(i+1):
             if j == 0 or j == i:
-                temp_list.append(1)
+                temp_list.append(1)  # append to temporary list
             else:
                 temp_list.append(triangle[i-1][j-1] + triangle[i-1][j])
         triangle.append(temp_list)
