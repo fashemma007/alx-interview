@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 
+"""Simple code which determines if all boxes in a list can be unlocked"""
+
+
 def canUnlockAll(boxes):
     """Determines if all boxes can be unlocked"""
     unlocked = [0]  # store all boxes that's been unlocked
@@ -11,11 +14,11 @@ def canUnlockAll(boxes):
         for key in box:
             # print(f"🔑 for box {key} found in 🥡 {box_index}")
             # check if the key falls within box range
-            key_valid = (key < len(boxes))
+            key_valid = key < len(boxes)
             # check if the key is not already in the list
-            key_missing = (key not in unlocked)
+            key_missing = key not in unlocked
             # check if the key isnt a duplicate to open current box
-            key_not_for_current_box = (key != box_index)
+            key_not_for_current_box = key != box_index
             all_checks = key_valid and key_missing and key_not_for_current_box
             # if all conditions are met
             if all_checks:
