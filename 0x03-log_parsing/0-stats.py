@@ -1,62 +1,39 @@
 #!/usr/bin/python3
-"""module docs for 0-stats.py"""
-
-from signal import SIGINT, signal
-import re
+"""This documents gather stats from stdin"""
 import sys
 
-PATTERN = '^(([0-9]{1,3}.){4,4})...+.([0-9]{4,4}).([0-9]{2,2}).([0-9]{2,2})...\
-+\"GET..[a-z]+.[0-9]+.HTTP/1.1\".[0-9]+.[0-9]+'
 
-status_codes = {
-    "200": 0, "301": 0, "400": 0, "401": 0,
-    "403": 0, "404": 0, "405": 0, "500": 0
-}
-
-
-def logger(func):
-    """logger decor"""
-    def wrapper(*args, **kwargs):
-        print(f"File size: {size}")
-        for k, v in status_codes.items():
-            print("{0}: {1}".format(k, v))
-        return func(*args, **kwargs)
-    return wrapper
+def print_pretty(size, code_dict):
+    """parse important data"""
+    print("File size: {}".format(size))
+    for key, value in sorted(code_dict.items()):
+        if (value != 0):
+            print("{}: {}".format(key, value))
 
 
-@logger
-def end(signum, frame):
-    """function to call when ending the program"""
-    exit(0)
-
-
-def check_line(lines):
-    """line checker"""
-    try:
-        re.search(PATTERN, lines).group()
-        return True
-    except AttributeError:
-        return False
-
-
-if __name__ == "__main__":
-    signal(SIGINT, end)
-    count = 0
+if __name__ == '__main__':
     size = 0
-    for line in sys.stdin:
-        # get data and append to a list
-        # if list == 10, sum and print it
-        # else keep appending
-
-        if check_line(line):
-            count += 1
-            stat_code = line.split()[-2]
-            status_codes[stat_code] += 1
-            size += int(line.split()[-1])
-            if count % 10 == 0:
-                print(f"File size: {size}")
-                for k, v in status_codes.items():
-                    print("{0}: {1}".format(k, v))
-                # print(f"{status_codes} {count}")
-        else:
-            pass
+    code_dict = {
+        "200": 0,
+        "301": 0,
+        "400": 0,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "405": 0,
+        "500": 0
+    }
+    try:
+        line_counter = 0
+        for line in sys.stdin:
+            line_counter += 1
+            code = line.split()[7]
+            size += int(line.split()[8])
+            if code in code_dict:
+                code_dict[code] += 1
+            if (line_counter % 10 == 0):
+                print_pretty(size, code_dict)
+        print_pretty(size, code_dict)
+    except KeyboardInterrupt:
+        print_pretty(size, code_dict)
+        raise
