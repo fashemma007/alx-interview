@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 """module docs for 0-stats.py"""
-import re
+
 from signal import SIGINT, signal
+import re
 import sys
-# no W1401
+
 PATTERN = '^(([0-9]{1,3}.){4,4})...+.([0-9]{4,4}).([0-9]{2,2}).([0-9]{2,2})...\
 +\"GET..[a-z]+.[0-9]+.HTTP/1.1\".[0-9]+.[0-9]+'
 
@@ -18,7 +19,7 @@ def logger(func):
     def wrapper(*args, **kwargs):
         print(f"File size: {size}")
         for k, v in status_codes.items():
-            print(f"{k}: {v}")
+            print("{0}: {1}".format(k, v))
         return func(*args, **kwargs)
     return wrapper
 
@@ -55,7 +56,7 @@ if __name__ == "__main__":
             if count % 10 == 0:
                 print(f"File size: {size}")
                 for k, v in status_codes.items():
-                    print(f"{k}: {v}")
+                    print("{0}: {1}".format(k, v))
                 # print(f"{status_codes} {count}")
         else:
             pass
