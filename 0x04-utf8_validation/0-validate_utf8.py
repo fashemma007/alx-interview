@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """validUTF8 function takes in a list of integers and returns True"""
 
-from typing import List
-
 
 def validUTF8(data):  # type (list[int]) -> bool
     """
