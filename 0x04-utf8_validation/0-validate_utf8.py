@@ -1,13 +1,13 @@
 #!/usr/bin/python3
-"""module docs for 0-validate_utf8.py"""
+"""validUTF8 function takes in a list of integers and returns True"""
 
 from typing import List
 
 
 def validUTF8(data):  # type (list[int]) -> bool
     """
-    The validUTF8 function takes in a list of integers and returns True if the
-    list represents a valid UTF-8 encoding, or False otherwise.
+    The validUTF8 function takes in a list of integers and returns True if
+    the list represents a valid UTF-8 encoding, or False otherwise.
 
     data `List[int]`: Store the data that is being passed into the function
     return: True if the data is a valid utf-8 encoding
