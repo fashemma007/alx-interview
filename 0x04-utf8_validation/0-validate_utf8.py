@@ -4,7 +4,7 @@
 from typing import List
 
 
-def validUTF8(data: List[int]) -> bool:
+def validUTF8(data):  # type (list[int]) -> bool
     """
     The validUTF8 function takes in a list of integers and returns True if the
     list represents a valid UTF-8 encoding, or False otherwise.
