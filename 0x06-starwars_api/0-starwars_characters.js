@@ -1,5 +1,4 @@
-#!/home/imitor/.nvm/versions/node/v12.22.12/bin/node
-// #!/usr/bin/node
+#!/usr/bin/node
 const id = process.argv.slice(2);
 const url = `https://swapi-api.hbtn.io/api/films/${id[0]}/`;
 
