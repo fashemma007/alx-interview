@@ -2,10 +2,7 @@
 """module docs for 0-rotate_2d_matrix.py"""
 
 
-from typing import List
-
-
-def rotate_2d_matrix(matrix: List[List[int]]) -> None:
+def rotate_2d_matrix(matrix) -> None:
     """rotates a 2D matrix in-place"""
     temp = []  # initialize empty list
     for item in matrix:
