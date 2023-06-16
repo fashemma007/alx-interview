@@ -7,19 +7,22 @@ def makeChange(coins, total):
     """Determines the fewest number of coins needed to meet a given
     amount total when given a pile of coins of different values.
     """
-    if total <= 0:  # precaution
+    remainder = total  # keep track of remainder
+    sorted_coins = coins[:]
+    sorted_coins.sort(reverse=True)  # take coins in descending order
+    count = 0
+    # print(sorted_coins)
+    if total <= 0:  # 0 as total gets 0
         return 0
-    rem = total  # keep track of remainder
-    coins_count = 0
-    coin_idx = 0
-    sorted_coins = sorted(coins, reverse=True)  # take coins in largest order
-    n = len(coins)
-    while rem > 0:
-        if coin_idx >= n:
+    idx_track = 0  # track current index
+    while (remainder > 0):
+        try:
+            # ensure total isn't exceeded
+            if remainder - sorted_coins[idx_track] >= 0:
+                remainder -= sorted_coins[idx_track]
+                count += 1  # increment
+            else:  # if it exceeds, do not add; move to next index
+                idx_track += 1
+        except IndexError:  # no coins // exceeds list index
             return -1
-        if rem - sorted_coins[coin_idx] >= 0:
-            rem -= sorted_coins[coin_idx]
-            coins_count += 1
-        else:
-            coin_idx += 1
-    return coins_count
+    return count
